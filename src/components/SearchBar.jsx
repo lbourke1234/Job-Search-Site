@@ -1,15 +1,9 @@
 import { Form, Container, Row, Col } from 'react-bootstrap'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setSearchTextActionAndFetch } from '../redux/actions'
 
-const mapStateToProps = (state) => ({})
-const mapDispatchToProps = (dispatch) => ({
-  setSearchText: (text) => {
-    dispatch(setSearchTextActionAndFetch(text))
-  }
-})
-
-const SearchBar = ({ setSearchText }) => {
+const SearchBar = () => {
+  const dispatch = useDispatch()
   return (
     <Container>
       <Row>
@@ -19,7 +13,7 @@ const SearchBar = ({ setSearchText }) => {
             type="text"
             id="search-bar"
             onChange={(e) => {
-              setSearchText(e.target.value)
+              dispatch(setSearchTextActionAndFetch(e.target.value))
             }}
           />
           <Form.Text muted>Search for a job here</Form.Text>
@@ -29,4 +23,4 @@ const SearchBar = ({ setSearchText }) => {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)
+export default SearchBar

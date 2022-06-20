@@ -3,23 +3,10 @@ import { Card } from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import { addCompanyToFavouritesAction } from '../redux/actions'
 import { removeFromFavouritesAction } from '../redux/actions'
-import { connect } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
-const mapStateToProps = (state) => ({})
-const mapDispatchToProps = (dispatch) => ({
-  addCompanyToFavourites: (company) => {
-    dispatch(addCompanyToFavouritesAction(company))
-  },
-  removeFromFavourites: (job) => {
-    dispatch(removeFromFavouritesAction(job))
-  }
-})
-
-const SingleJob = ({ job, addCompanyToFavourites, removeFromFavourites, index }) => {
-  // const search = useParams()
-  // console.log(search.favourites)
-
+const SingleJob = ({ job, index }) => {
+  const dispatch = useDispatch()
   return (
     <Card>
       <Card.Body>
@@ -34,10 +21,16 @@ const SingleJob = ({ job, addCompanyToFavourites, removeFromFavourites, index })
         <Card.Text>{job.salary}</Card.Text>
         <h4>Type</h4>
         <Card.Text>{job.type}</Card.Text>
-        <Button variant="outline-success" onClick={() => addCompanyToFavourites(job)}>
+        <Button
+          variant="outline-success"
+          onClick={() => dispatch(addCompanyToFavouritesAction(job))}
+        >
           Add Company To Favourites
         </Button>{' '}
-        <Button variant="outline-success" onClick={() => removeFromFavourites(index)}>
+        <Button
+          variant="outline-success"
+          onClick={() => dispatch(removeFromFavouritesAction(index))}
+        >
           Delete
         </Button>
       </Card.Body>
@@ -45,4 +38,4 @@ const SingleJob = ({ job, addCompanyToFavourites, removeFromFavourites, index })
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleJob)
+export default SingleJob

@@ -13,7 +13,7 @@ const userReducer = (state = initialState, action) => {
     case REMOVE_FROM_FAVOURITES:
       return {
         favouritesList: [
-          state.favouritesList.slice(0, action.payload),
+          ...state.favouritesList.slice(0, action.payload),
           ...state.favouritesList.slice(action.payload + 1)
         ]
       }

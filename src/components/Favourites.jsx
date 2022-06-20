@@ -1,19 +1,12 @@
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import SingleJob from './SingleJob'
-import { fetchFavouritesAction } from '../redux/actions'
 import { useEffect, useState } from 'react'
 
-const mapStateToProps = (state) => ({
-  favourites: state.user.favouritesList
-})
-const mapDispatchToProps = (dispatch) => ({
-  fetchFavourites: (list) => {
-    dispatch(fetchFavouritesAction(list))
-  }
-})
+const Favourites = () => {
+  const favourites = useSelector((state) => state.user.favouritesList)
 
-const Favourites = ({ favourites }) => {
   const [faves, setFaves] = useState([])
+
   const fetchFavourites = async () => {
     const response = await fetch(
       `https://strive-jobs-api.herokuapp.com/jobs?search=pureintegration&limit=10`
@@ -35,4 +28,4 @@ const Favourites = ({ favourites }) => {
   return favourites.map((job, i) => <SingleJob job={job} key={job._id} index={i} />)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Favourites)
+export default Favourites

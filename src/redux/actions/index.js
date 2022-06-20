@@ -92,9 +92,9 @@ export const getBooksAction = () => {
   }
 }
 
-export const removeFromFavouritesAction = (job) => ({
+export const removeFromFavouritesAction = (index) => ({
   type: REMOVE_FROM_FAVOURITES,
-  payload: job
+  payload: index
 })
 
 export const errorWhileFetchingAction = () => ({
